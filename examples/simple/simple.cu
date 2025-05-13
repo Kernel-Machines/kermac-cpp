@@ -15,10 +15,10 @@ main() {
     u64 N = 5; // num cols
     u64 num_batches = 2;  // num batches
 
-    // Create Stack Allocators in this scope with `BYTES` allocated for each
-    // Memory is aligned to `HOST_ALLOC_ALIGNMENT` and `DEVICE_ALLOC_ALIGNMENT` respectively
-    // each allocation from these just moves a pointer to the `NEAREST_LARGER_MULTIPLE` of the alignment
-    // allocation and deallocation is checked for sanity by a counter.
+    // Create Stack Allocators in this scope with `BYTES` allocated for each.
+    // Memory is aligned to `HOST_ALLOC_ALIGNMENT` and `DEVICE_ALLOC_ALIGNMENT` respectively.
+    // Each allocation from these just moves a pointer to the `NEAREST_LARGER_MULTIPLE` of the alignment.
+    // Allocation and Deallocation is checked for sanity by a counter.
     HostStackAllocator hsa(BYTES);
     DeviceStackAllocator dsa(BYTES);
 

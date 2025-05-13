@@ -1,0 +1,2 @@
+project(kermac-cutensor)
+
