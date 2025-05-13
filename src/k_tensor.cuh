@@ -214,6 +214,7 @@ tensor_copy_to(
     );
 }
 
+#if 0
 static
 void
 tensor_print(
@@ -258,6 +259,8 @@ tensor_print(
     tensor_print(hsa, h_tensor, row_major);
 }
 
+#endif
+
 template <class T>
 static
 const char *
@@ -289,11 +292,11 @@ _tensor_print_formatting_string() {
 
 template <class T>
 void
-tensor_print_edge(
+tensor_print(
     HostStackAllocator &hsa,
-	const char *str, 
 	HostTensor<T> &tensor, 
-	i32 edge_items
+	const char *str,
+	i32 edge_items = 6
 ) {
     static_assert(
         std::is_same_v<T, f32> || 
@@ -328,17 +331,17 @@ tensor_print_edge(
 
 template <class T>
 void
-tensor_print_edge(
+tensor_print(
     HostStackAllocator &hsa,
-	const char *str, 
 	DeviceTensor<T> &tensor, 
-	i32 edge_items,
-    cudaStream_t stream
+	const char *str, 
+    cudaStream_t stream,
+	i32 edge_items = 6
 ) {
     HostTensor<T> h_tensor(hsa, tensor.num_rows, tensor.num_cols);
     get_matrix(tensor, h_tensor, stream);
     cuCheck( cudaStreamSynchronize(stream) );
-    tensor_print_edge(hsa, str, h_tensor, edge_items);
+    tensor_print(hsa, h_tensor, str, edge_items);
 }
 
 }

@@ -253,16 +253,16 @@ multi_tensor_print_batches(
     HostStackAllocator &hsa,
     MultiTensor<memory_space, T> &multi_tensor,
     const char *multi_tensor_name,
-    i32 edge_items,
-    cudaStream_t stream
+    cudaStream_t stream,
+    i32 edge_items = 6
 ) {
     // ASSERT( multi_tensor.num_modes == 3 || multi_tensor.num_modes == 2 );
 
     u64 B = multi_tensor.extent[multi_tensor.num_modes-1];
     for (u64 b = 0; b < B; b++) {
         DeviceTensor<T> multi_tensor_view(multi_tensor.tensor, multi_tensor_batch_slice(multi_tensor, b));
-        printf("(%llu) ", b);
-        tensor_print_edge(hsa, multi_tensor_name, multi_tensor_view, edge_items, stream);
+        printf("(%" PRIu64 ") ", b);
+        tensor_print(hsa, multi_tensor_view, multi_tensor_name, stream, edge_items);
     }
 }
 
@@ -274,8 +274,8 @@ multi_tensor_zip_print_batches(
     const char *multi_tensor_a_name,
     MultiTensor<memory_space, T> &multi_tensor_b,
     const char *multi_tensor_b_name,
-    i32 edge_items,
-    cudaStream_t stream
+    cudaStream_t stream,
+    i32 edge_items = 6
 ) {
     ASSERT( multi_tensor_a.num_modes == 3 || multi_tensor_a.num_modes == 2 );
     ASSERT( multi_tensor_b.num_modes == 3 || multi_tensor_b.num_modes == 2 );
@@ -288,11 +288,11 @@ multi_tensor_zip_print_batches(
     for (u64 b = 0; b < B; b++) {
         DeviceTensor<T> multi_tensor_a_view(multi_tensor_a.tensor, multi_tensor_batch_slice(multi_tensor_a, b));
         printf("(%" PRIu64 ") ", b);
-        tensor_print_edge(hsa, multi_tensor_a_name, multi_tensor_a_view, edge_items, stream);
+        tensor_print(hsa, multi_tensor_a_view, multi_tensor_a_name, stream, edge_items);
 
         DeviceTensor<T> multi_tensor_b_view(multi_tensor_b.tensor, multi_tensor_batch_slice(multi_tensor_b, b));
         printf("(%" PRIu64 ") ", b);
-        tensor_print_edge(hsa, multi_tensor_b_name, multi_tensor_b_view, edge_items, stream);
+        tensor_print(hsa, multi_tensor_b_view, multi_tensor_b_name, stream, edge_items);
     }
 }
 

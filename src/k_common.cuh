@@ -16,6 +16,8 @@ using i64 = int64_t;
 using f32 = float;
 using f64 = double;
 
+// These exist so they aren't initialized to the wrong type.
+// Doing this can cause ptx code to emit spurious conversions from f64 to f32
 template <typename T> constexpr T c_one = T(1.0);
 template <typename T> constexpr T c_zero = T(0.0);
 template <typename T> constexpr T c_two = T(2.0);
