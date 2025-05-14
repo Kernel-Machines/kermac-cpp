@@ -1,5 +1,6 @@
 
-add_subdirectory(simple)
+add_subdirectory(01-simple)
+add_subdirectory(02-dynamic-memory)
 
 if (KERMAC_CUBLAS)
     add_subdirectory(cublas-simple-gemm)

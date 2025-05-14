@@ -1,4 +1,4 @@
-project(kermac-example-cublas-simple-gemm)
+project(kermac-example-02-dynamic-memory)
 
 add_executable(
     ${PROJECT_NAME}

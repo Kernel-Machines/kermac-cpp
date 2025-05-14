@@ -1,8 +1,8 @@
-project(kermac-example-simple)
+project(kermac-example-01-simple)
 
 add_executable(
     ${PROJECT_NAME}
-    simple.cu
+    main.cu
 )
 
 target_link_libraries(
