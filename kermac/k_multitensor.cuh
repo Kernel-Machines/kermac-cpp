@@ -261,7 +261,7 @@ multi_tensor_print_batches(
     u64 B = multi_tensor.extent[multi_tensor.num_modes-1];
     for (u64 b = 0; b < B; b++) {
         DeviceTensor<T> multi_tensor_view(multi_tensor.tensor, multi_tensor_batch_slice(multi_tensor, b));
-        printf("(%" PRIu64 ") ", b);
+        WET_COND(multi_tensor) printf("(%" PRIu64 ") ", b);
         tensor_print(hsa, multi_tensor_view, multi_tensor_name, stream, edge_items);
     }
 }
