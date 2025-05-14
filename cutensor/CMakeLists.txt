@@ -75,9 +75,6 @@ else()
     message(STATUS "Using existing extracted cuTENSOR: ${EXTRACT_DIR}")
 endif()
 
-if (NOT USE_CUTENSOR_STANDALONE)
-# Set up library paths for your project
-
 set(CUTENSOR_INCLUDE "${CUTENSOR_ROOT}/include")
 set(CUTENSOR_LIB "${CUTENSOR_ROOT}/lib/${CUDA_VERSION}")
 
@@ -95,4 +92,3 @@ target_link_libraries(
     INTERFACE
     ${CUTENSOR_LIB}/libcutensor.so
 )
-endif()
