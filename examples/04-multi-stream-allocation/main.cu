@@ -64,6 +64,8 @@ main() {
         dsa.stream_snapshot();
         for (i32 b = 0; b < num_batches; b++) {
             // Starts recording offsets in this scope.
+            // Each stream records its local largest_current_offset
+            // So within each stream scope memory is reused locally.
             dsa.stream_alloc_start(); 
             {
                 cudaStream_t this_stream = streams[b % num_streams];
